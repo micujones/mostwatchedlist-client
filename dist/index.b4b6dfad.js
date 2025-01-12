@@ -2948,7 +2948,7 @@ try {
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
 var _indexScss = require("./index.scss");
-const mostWatchedListApplication = ()=>{
+const MostWatchedListApplication = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "most-watched-list",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -2964,14 +2964,17 @@ const mostWatchedListApplication = ()=>{
         columnNumber: 9
     }, undefined);
 };
+_c = MostWatchedListApplication;
 // Find root of app
 const container = document.querySelector('#root');
 const root = (0, _client.createRoot)(container);
-root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("mostWatchedListApplication", {}, void 0, false, {
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MostWatchedListApplication, {}, void 0, false, {
     fileName: "src/index.jsx",
     lineNumber: 16,
     columnNumber: 13
 }, undefined));
+var _c;
+$RefreshReg$(_c, "MostWatchedListApplication");
 
   $parcel$ReactRefreshHelpers$98a3.postlude(module);
 } finally {

@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import './index.scss';
 
-const mostWatchedListApplication = () => {
+const MostWatchedListApplication = () => {
     return (
-        <div className='most-watched-list'>
+        <div className = 'most-watched-list'>
             <div>Good morning</div>
         </div>
     );
@@ -13,4 +13,4 @@ const mostWatchedListApplication = () => {
 const container = document.querySelector('#root');
 const root = createRoot(container);
 
-root.render(<mostWatchedListApplication/>);
+root.render(<MostWatchedListApplication/>);
