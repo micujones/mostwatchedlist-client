@@ -40,17 +40,15 @@ export const MainView = () => {
                 }}/>
                 <hr />
                 <h2>Similar movies</h2>
-                <div>
-                    {similarMovies.map((movie) => (
-                        <MovieCard
-                            key={movie._id}
-                            movie={movie}
-                            onMovieClick={(newSelectedMovie) => {
-                                setSelectedMovie(newSelectedMovie);
-                            }}
-                        />
-                    ))}
-                </div>
+                {similarMovies.map((movie) => (
+                    <MovieCard
+                        key={movie._id}
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                            setSelectedMovie(newSelectedMovie);
+                        }}
+                    />
+                ))}
             </>
         )
     }
