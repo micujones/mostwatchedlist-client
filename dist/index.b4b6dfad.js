@@ -2973,7 +2973,7 @@ $RefreshReg$(_c, "MostWatchedListApplication");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7","../components/main-view/main-view":"bJOVs"}],"iTorj":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","../components/main-view/main-view":"bJOVs","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7"}],"iTorj":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -18568,7 +18568,193 @@ module.exports = require("b0f0e6b9e8349dac");
     "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
 })();
 
-},{"6f0162e9ab224cd4":"21dqq"}],"lJZlQ":[function() {},{}],"6cfJ7":[function(require,module,exports,__globalThis) {
+},{"6f0162e9ab224cd4":"21dqq"}],"lJZlQ":[function() {},{}],"bJOVs":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$f6a9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$f6a9.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _movieCard = require("../movie-card/movie-card");
+var _movieView = require("../movie-view/movie-view");
+var _s = $RefreshSig$();
+const MainView = ()=>{
+    _s();
+    const [movies, setMovies] = (0, _react.useState)([
+        {
+            title: 'Cruella',
+            description: 'In 1970s London amidst the punk rock revolution, a young grifter named Estella de Ville is determined to make a name for herself in the fashion world. However, her path to success takes a dark turn as she becomes obsessed with fur, leading her to transform into the infamous and psychopathic Cruella de Vil.',
+            genre: {
+                name: 'Crime',
+                description: 'Crime films explore the world of criminal activity, often focusing on themes of corruption, violence, and the pursuit of power.'
+            },
+            director: {
+                name: 'Craig Gillespie',
+                bio: 'Craig Gillespie is an Australian film director and screenwriter. He is best known for directing the films I, Tonya (2017) and Cruella (2021).'
+            },
+            actors: [
+                'Emma Stone',
+                'Emma Thompson',
+                'Paul Walter Hauser',
+                'Joel Fry'
+            ],
+            imagePath: 'https://wallpapercat.com/w/full/3/4/5/35957-3840x2160-desktop-4k-cruella-2021-background-photo.jpg',
+            featured: true
+        },
+        {
+            title: 'Joker',
+            description: 'A failed comedian begins a slow descent into madness as he transforms into a criminal mastermind.',
+            genre: {
+                name: 'Thriller',
+                description: 'Thriller movies are a genre of suspenseful films that aim to evoke feelings of excitement, anxiety, and fear in viewers, often by focusing on a protagonist facing a dangerous or mysterious situation.'
+            },
+            director: {
+                name: 'Todd Phillips',
+                bio: 'Todd Phillips is an American film director and screenwriter known for his work in comedy and dark comedy.'
+            },
+            actors: [
+                'Joaquin Phoenix',
+                'Zazie Beetz',
+                'Frances Conroy',
+                'Robert De Niro'
+            ],
+            imagePath: 'https://preview.redd.it/mmd6h3266jn51.jpg?width=640&crop=smart&auto=webp&s=bd7fd0c5c6c3b3e7bd8f1139cbb6042b7801c3fb',
+            featured: true
+        },
+        {
+            title: 'Zootopia',
+            description: 'In a mammal metropolis where predator and prey live side-by-side, a determined rabbit cop and a cynical fox must work together to uncover a conspiracy.',
+            genre: {
+                name: 'Adventure',
+                description: 'Adventure movies involve exciting and often perilous journeys, featuring protagonists who face challenges, overcome obstacles, and explore unknown or exotic locations.'
+            },
+            director: {
+                name: 'Byron Howard',
+                bio: 'Byron Howard is an American animator, film director, screenwriter, and voice actor. He is best known for his work at Walt Disney Animation Studios, where he co-directed the films Tangled (2010), Zootopia (2016), and Encanto (2021).'
+            },
+            actors: [
+                'Ginnifer Goodwin',
+                'Jason Bateman',
+                'Idris Elba',
+                'Jenny Slate'
+            ],
+            imagePath: 'https://wallpapercat.com/w/full/6/6/3/153831-3840x2160-desktop-4k-zootopia-wallpaper-image.jpg',
+            featured: true
+        }
+    ]);
+    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+        movie: selectedMovie,
+        onBackClick: ()=>{
+            setSelectedMovie(null);
+        }
+    }, void 0, false, {
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 58,
+        columnNumber: 13
+    }, undefined);
+    if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "This list is empty."
+    }, void 0, false, {
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 67,
+        columnNumber: 16
+    }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                movie: movie,
+                onMovieClick: (newSelectedMovie)=>{
+                    setSelectedMovie(newSelectedMovie);
+                }
+            }, movies.indexOf(movie), false, {
+                fileName: "components/main-view/main-view.jsx",
+                lineNumber: 73,
+                columnNumber: 17
+            }, undefined))
+    }, void 0, false, {
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 71,
+        columnNumber: 9
+    }, undefined);
+};
+_s(MainView, "bz6tIcdFNjKw/4b7ZnO0mwkdTKk=");
+_c = MainView;
+var _c;
+$RefreshReg$(_c, "MainView");
+
+  $parcel$ReactRefreshHelpers$f6a9.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"8z54c","../movie-view/movie-view":"lNY7v","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7"}],"8z54c":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$42ca = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$42ca.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+const MovieCard = ({ movie, onMovieClick })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        onClick: ()=>{
+            onMovieClick(movie);
+        },
+        children: movie.title
+    }, void 0, false, {
+        fileName: "components/movie-card/movie-card.jsx",
+        lineNumber: 3,
+        columnNumber: 9
+    }, undefined);
+};
+_c = MovieCard;
+var _c;
+$RefreshReg$(_c, "MovieCard");
+
+  $parcel$ReactRefreshHelpers$42ca.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7"}],"8gW2c":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"6cfJ7":[function(require,module,exports,__globalThis) {
 "use strict";
 var Refresh = require("d6b9575c01f44f4e");
 var { version } = require("6c18ba6d1e286d81");
@@ -18713,193 +18899,7 @@ function registerExportsForReactRefresh(module1) {
 },{"d6b9575c01f44f4e":"hsY4O","6c18ba6d1e286d81":"k7EmI"}],"k7EmI":[function(require,module,exports,__globalThis) {
 module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
 
-},{}],"bJOVs":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$f6a9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$f6a9.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MainView", ()=>MainView);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _movieCard = require("../movie-card/movie-card");
-var _movieView = require("../movie-view/movie-view");
-var _s = $RefreshSig$();
-const MainView = ()=>{
-    _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            title: 'Cruella',
-            description: 'In 1970s London amidst the punk rock revolution, a young grifter named Estella de Ville is determined to make a name for herself in the fashion world. However, her path to success takes a dark turn as she becomes obsessed with fur, leading her to transform into the infamous and psychopathic Cruella de Vil.',
-            genre: {
-                name: 'Crime',
-                description: 'Crime films explore the world of criminal activity, often focusing on themes of corruption, violence, and the pursuit of power.'
-            },
-            director: {
-                name: 'Craig Gillespie',
-                bio: 'Craig Gillespie is an Australian film director and screenwriter. He is best known for directing the films I, Tonya (2017) and Cruella (2021).'
-            },
-            actors: [
-                'Emma Stone',
-                'Emma Thompson',
-                'Paul Walter Hauser',
-                'Joel Fry'
-            ],
-            imagePath: 'https://wallpapercat.com/w/full/3/4/5/35957-3840x2160-desktop-4k-cruella-2021-background-photo.jpg',
-            featured: true
-        },
-        {
-            title: 'Joker',
-            description: 'A failed comedian begins a slow descent into madness as he transforms into a criminal mastermind.',
-            genre: {
-                name: 'Thriller',
-                description: 'Thriller movies are a genre of suspenseful films that aim to evoke feelings of excitement, anxiety, and fear in viewers, often by focusing on a protagonist facing a dangerous or mysterious situation.'
-            },
-            director: {
-                name: 'Todd Phillips',
-                bio: 'Todd Phillips is an American film director and screenwriter known for his work in comedy and dark comedy.'
-            },
-            actors: [
-                'Joaquin Phoenix',
-                'Zazie Beetz',
-                'Frances Conroy',
-                'Robert De Niro'
-            ],
-            imagePath: 'https://preview.redd.it/mmd6h3266jn51.jpg?width=640&crop=smart&auto=webp&s=bd7fd0c5c6c3b3e7bd8f1139cbb6042b7801c3fb',
-            featured: true
-        },
-        {
-            title: 'Zootopia',
-            description: 'In a mammal metropolis where predator and prey live side-by-side, a determined rabbit cop and a cynical fox must work together to uncover a conspiracy.',
-            genre: {
-                name: 'Adventure',
-                description: 'Adventure movies involve exciting and often perilous journeys, featuring protagonists who face challenges, overcome obstacles, and explore unknown or exotic locations.'
-            },
-            director: {
-                name: 'Byron Howard',
-                bio: 'Byron Howard is an American animator, film director, screenwriter, and voice actor. He is best known for his work at Walt Disney Animation Studios, where he co-directed the films Tangled (2010), Zootopia (2016), and Encanto (2021).'
-            },
-            actors: [
-                'Ginnifer Goodwin',
-                'Jason Bateman',
-                'Idris Elba',
-                'Jenny Slate'
-            ],
-            imagePath: 'https://wallpapercat.com/w/full/6/6/3/153831-3840x2160-desktop-4k-zootopia-wallpaper-image.jpg',
-            featured: true
-        }
-    ]);
-    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        movie: selectedMovie,
-        onBackClick: ()=>{
-            setSelectedMovie(null);
-        }
-    }, void 0, false, {
-        fileName: "components/main-view/main-view.jsx",
-        lineNumber: 58,
-        columnNumber: 13
-    }, undefined);
-    if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: "This list is empty."
-    }, void 0, false, {
-        fileName: "components/main-view/main-view.jsx",
-        lineNumber: 67,
-        columnNumber: 16
-    }, undefined);
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: movie,
-                onMovieClick: (newSelectedMovie)=>{
-                    setSelectedMovie(newSelectedMovie);
-                }
-            }, movies.indexOf(movie), false, {
-                fileName: "components/main-view/main-view.jsx",
-                lineNumber: 73,
-                columnNumber: 17
-            }, undefined))
-    }, void 0, false, {
-        fileName: "components/main-view/main-view.jsx",
-        lineNumber: 71,
-        columnNumber: 9
-    }, undefined);
-};
-_s(MainView, "bz6tIcdFNjKw/4b7ZnO0mwkdTKk=");
-_c = MainView;
-var _c;
-$RefreshReg$(_c, "MainView");
-
-  $parcel$ReactRefreshHelpers$f6a9.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7","../movie-card/movie-card":"8z54c","../movie-view/movie-view":"lNY7v"}],"8gW2c":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"8z54c":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$42ca = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$42ca.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-const MovieCard = ({ movie, onMovieClick })=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        onClick: ()=>{
-            onMovieClick(movie);
-        },
-        children: movie.title
-    }, void 0, false, {
-        fileName: "components/movie-card/movie-card.jsx",
-        lineNumber: 3,
-        columnNumber: 9
-    }, undefined);
-};
-_c = MovieCard;
-var _c;
-$RefreshReg$(_c, "MovieCard");
-
-  $parcel$ReactRefreshHelpers$42ca.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7"}],"lNY7v":[function(require,module,exports,__globalThis) {
+},{}],"lNY7v":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$2e96 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
