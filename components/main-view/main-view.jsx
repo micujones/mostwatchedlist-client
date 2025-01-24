@@ -6,6 +6,7 @@ import { LoginView } from '../login-view/login-view';
 
 export const MainView = () => {
     const [ user, setUser ] = useState(null);
+    const [ token, setToken ] = useState(null);
     const [ movies, setMovies ] = useState([]);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -30,7 +31,16 @@ export const MainView = () => {
             });
     })
 
-    if(!user) return <LoginView onLoggedIn={(user) => setUser(user)}/>
+    if(!user) {
+        return (
+            <LoginView 
+                onLoggedIn={(user) => {
+                    setUser(user);
+                    setToken(token);
+                }}
+            />
+        );
+    }
 
     if (selectedMovie) {
         let similarMovies = movies.filter((movie) => selectedMovie.genre.name === movie.genre.name && movie.title != selectedMovie.title);

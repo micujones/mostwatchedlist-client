@@ -24,7 +24,7 @@ export const LoginView = () => {
             .then((data) => {
                 console.log('Login response: ', data);
                 if (data.user) {
-                    onLoggedIn(data.user);
+                    onLoggedIn(data.user, data.token);
                 } else {
                     alert('User does not exist.');
                 }
