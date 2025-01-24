@@ -10,15 +10,15 @@ export const LoginView = () => {
 
         const data = {
             username: username,
-            password: password
+            password: password,
         };
 
         fetch('https://mostwatchedlist-f9604e12841c.herokuapp.com/login', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         })
             .then((response) => response.json())
             .then((data) => {
@@ -31,24 +31,30 @@ export const LoginView = () => {
             })
             .catch((e) => {
                 alert('Something broke.');
-            })
-    }
+            });
+    };
 
     return (
-        <form action="">
-            <label>Username
-                <input type="text"
-                value={username} 
-                onChange={(e) => setUsername(e.target.value)} 
-                required />
+        <form onSubmit={handleSubmit}>
+            <label>
+                Username
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
             </label>
-            <label>Password
-                <input type="password" 
-                value={password} 
-                onChange={(e) => setUsername(e.target.value)} 
-                required/>
+            <label>
+                Password
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
             </label>
             <button type="submit">SUBMIT</button>
         </form>
-    )
-}
+    );
+};
