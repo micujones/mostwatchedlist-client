@@ -18600,20 +18600,8 @@ const MainView = ()=>{
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.map((movie)=>{
-                return {
-                    id: movie._id,
-                    title: movie.title,
-                    description: movie.description,
-                    director: movie.director,
-                    actors: movie.actors,
-                    genre: movie.genre,
-                    image: movie.imagePath,
-                    featured: movie.featured
-                };
-            });
-            setMovies(moviesFromApi);
+        }).then((response)=>response.json()).then((movies)=>{
+            setMovies(movies);
         });
     }, [
         token
@@ -18625,7 +18613,7 @@ const MainView = ()=>{
         }
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 44,
+        lineNumber: 31,
         columnNumber: 13
     }, undefined);
     if (selectedMovie) {
@@ -18639,19 +18627,19 @@ const MainView = ()=>{
                     }
                 }, void 0, false, {
                     fileName: "components/main-view/main-view.jsx",
-                    lineNumber: 62,
+                    lineNumber: 49,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                     fileName: "components/main-view/main-view.jsx",
-                    lineNumber: 68,
+                    lineNumber: 55,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                     children: "Similar movies"
                 }, void 0, false, {
                     fileName: "components/main-view/main-view.jsx",
-                    lineNumber: 69,
+                    lineNumber: 56,
                     columnNumber: 17
                 }, undefined),
                 similarMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
@@ -18661,7 +18649,7 @@ const MainView = ()=>{
                         }
                     }, movie._id, false, {
                         fileName: "components/main-view/main-view.jsx",
-                        lineNumber: 71,
+                        lineNumber: 58,
                         columnNumber: 21
                     }, undefined))
             ]
@@ -18671,7 +18659,7 @@ const MainView = ()=>{
         children: "This list is empty."
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 84,
+        lineNumber: 71,
         columnNumber: 16
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
@@ -18685,7 +18673,7 @@ const MainView = ()=>{
                 children: "LOGOUT"
             }, void 0, false, {
                 fileName: "components/main-view/main-view.jsx",
-                lineNumber: 89,
+                lineNumber: 76,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18696,12 +18684,12 @@ const MainView = ()=>{
                         }
                     }, movie._id, false, {
                         fileName: "components/main-view/main-view.jsx",
-                        lineNumber: 100,
+                        lineNumber: 87,
                         columnNumber: 21
                     }, undefined))
             }, void 0, false, {
                 fileName: "components/main-view/main-view.jsx",
-                lineNumber: 98,
+                lineNumber: 85,
                 columnNumber: 13
             }, undefined)
         ]
