@@ -3,15 +3,18 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 
-
 export const MainView = () => {
-    const [ user, setUser ] = useState(null);
-    const [ token, setToken ] = useState(null);
-    const [ movies, setMovies ] = useState([]);
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+    const [movies, setMovies] = useState([]);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
     useEffect(() => {
-        fetch('https://mostwatchedlist-f9604e12841c.herokuapp.com/movies')
+        if (!token) return;
+
+        fetch('https://mostwatchedlist-f9604e12841c.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}` },
+        })
             .then((response) => response.json())
             .then((data) => {
                 const moviesFromApi = data.map((movie) => {
@@ -23,17 +26,17 @@ export const MainView = () => {
                         actors: movie.actors,
                         genre: movie.genre,
                         image: movie.imagePath,
-                        featured: movie.featured
-                    }
+                        featured: movie.featured,
+                    };
                 });
 
                 setMovies(moviesFromApi);
             });
-    })
+    }, [token]);
 
-    if(!user) {
+    if (!user) {
         return (
-            <LoginView 
+            <LoginView
                 onLoggedIn={(user) => {
                     setUser(user);
                     setToken(token);
@@ -43,15 +46,20 @@ export const MainView = () => {
     }
 
     if (selectedMovie) {
-        let similarMovies = movies.filter((movie) => selectedMovie.genre.name === movie.genre.name && movie.title != selectedMovie.title);
+        let similarMovies = movies.filter(
+            (movie) =>
+                selectedMovie.genre.name === movie.genre.name &&
+                movie.title != selectedMovie.title
+        );
 
         return (
             <>
-                <MovieView 
-                movie={selectedMovie} 
-                onBackClick={() => {
-                    setSelectedMovie(null)
-                }}/>
+                <MovieView
+                    movie={selectedMovie}
+                    onBackClick={() => {
+                        setSelectedMovie(null);
+                    }}
+                />
                 <hr />
                 <h2>Similar movies</h2>
                 {similarMovies.map((movie) => (
@@ -64,7 +72,7 @@ export const MainView = () => {
                     />
                 ))}
             </>
-        )
+        );
     }
 
     if (movies.length === 0) {
@@ -84,4 +92,4 @@ export const MainView = () => {
             ))}
         </div>
     );
-}
+};
