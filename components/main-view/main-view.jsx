@@ -54,24 +54,30 @@ export const MainView = () => {
                 <div>The list is empty.</div>
             ) : (
                 <>
-                    <Button
-                        variant="danger"
-                        onClick={() => {
-                            setUser(null);
-                            setToken(null);
-                            localStorage.clear();
-                        }}
-                    >
-                        Logout
-                    </Button>
+                    <Row className="mb-3" style={{ padding: '10px 0px' }}>
+                        <Col md={{ span: 1, offset: 11 }}>
+                            <Button
+                                variant="danger"
+                                onClick={() => {
+                                    setUser(null);
+                                    setToken(null);
+                                    localStorage.clear();
+                                }}
+                            >
+                                Logout
+                            </Button>
+                        </Col>
+                    </Row>
+
                     {movies.map((movie) => (
-                        <MovieCard
-                            key={movie._id}
-                            movie={movie}
-                            onMovieClick={(newSelectedMovie) => {
-                                setSelectedMovie(newSelectedMovie);
-                            }}
-                        />
+                        <Col className="mb-3" key={movie._id} md={3}>
+                            <MovieCard
+                                movie={movie}
+                                onMovieClick={(newSelectedMovie) => {
+                                    setSelectedMovie(newSelectedMovie);
+                                }}
+                            />
+                        </Col>
                     ))}
                 </>
             )}
