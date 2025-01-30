@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export const SignupView = () => {
     const [username, setUsername] = useState('');
@@ -31,44 +33,46 @@ export const SignupView = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Email
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                />
-            </label>
-            <label>
-                Username
-                <input
+                ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Form.Control
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                />
-            </label>
-            <label>
-                Password
-                <input
+                ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                />
-            </label>
-            <label>
-                Birthday
-                <input
+                ></Form.Control>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Birthday</Form.Label>
+                <Form.Control
                     type="date"
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
                     required
-                />
-            </label>
-            <button type="submit">SUBMIT</button>
-        </form>
+                ></Form.Control>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
     );
 };
