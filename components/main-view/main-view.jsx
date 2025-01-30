@@ -57,7 +57,8 @@ export const MainView = () => {
                     <Row className="mb-3" style={{ padding: '10px 0px' }}>
                         <Col md={{ span: 1, offset: 11 }}>
                             <Button
-                                variant="danger"
+                                variant="dark"
+                                className="button"
                                 onClick={() => {
                                     setUser(null);
                                     setToken(null);
