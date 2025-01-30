@@ -1,5 +1,13 @@
-$color: steelblue;
+$primary: #bc885d;
+$body-bg: #fdf5e6;
 
-.most-watched-list {
-    color: $color;
+@import '~bootstrap/scss/bootstrap.scss';
+
+.button {
+    background-color: $primary;
+    border: none;
+}
+
+.button:hover {
+    background-color: #835f41;
 }
