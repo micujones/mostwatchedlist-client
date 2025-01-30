@@ -3,6 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
+import Row from 'react-bootstrap/Row';
 
 export const MainView = () => {
     // User data variables
@@ -27,77 +28,47 @@ export const MainView = () => {
             });
     }, [token]);
 
-    if (!user) {
-        return (
-            <>
-                <LoginView
-                    onLoggedIn={(user) => {
-                        setUser(user);
-                        setToken(token);
-                    }}
+    return (
+        <Row>
+            {!user ? (
+                <>
+                    <LoginView
+                        onLoggedIn={(user) => {
+                            setUser(user);
+                            setToken(token);
+                        }}
+                    />
+                    or
+                    <SignupView />
+                </>
+            ) : selectedMovie ? (
+                <MovieView
+                    movie={selectedMovie}
+                    onBackClick={() => setSelectedMovie(null)}
                 />
-                or
-                <SignupView />
-            </>
-        );
-    }
+            ) : movies.length === 0 ? (
+                <div>The list is empty.</div>
+            ) : (
+                <>
+                    {movies.map((movie) => (
+                        <MovieCard
+                            key={movie._id}
+                            movie={movie}
+                            onMovieClick={(newSelectedMovie) => {
+                                setSelectedMovie(newSelectedMovie);
+                            }}
+                        />
+                    ))}
+                </>
+            )}
+        </Row>
+    );
 
-    if (selectedMovie) {
-        let similarMovies = movies.filter(
+    {
+        /* let similarMovies = movies.filter(
             (movie) =>
                 selectedMovie.genre.name === movie.genre.name &&
                 movie.title != selectedMovie.title
-        );
-
-        return (
-            <>
-                <MovieView
-                    movie={selectedMovie}
-                    onBackClick={() => {
-                        setSelectedMovie(null);
-                    }}
-                />
-                <hr />
-                <h2>Similar movies</h2>
-                {similarMovies.map((movie) => (
-                    <MovieCard
-                        key={movie._id}
-                        movie={movie}
-                        onMovieClick={(newSelectedMovie) => {
-                            setSelectedMovie(newSelectedMovie);
-                        }}
-                    />
-                ))}
-            </>
-        );
+        ); */
     }
-
-    if (movies.length === 0) {
-        return <div>This list is empty.</div>;
-    }
-
-    return (
-        <>
-            <button
-                onClick={() => {
-                    setUser(null);
-                    setToken(null);
-                    localStorage.clear();
-                }}
-            >
-                LOGOUT
-            </button>
-            <div>
-                {movies.map((movie) => (
-                    <MovieCard
-                        key={movie._id}
-                        movie={movie}
-                        onMovieClick={(newSelectedMovie) => {
-                            setSelectedMovie(newSelectedMovie);
-                        }}
-                    />
-                ))}
-            </div>
-        </>
-    );
 };
