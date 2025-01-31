@@ -6,6 +6,7 @@ import { SignupView } from '../signup-view/signup-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 export const MainView = () => {
     // User data variables
@@ -31,65 +32,64 @@ export const MainView = () => {
     }, [token]);
 
     return (
-        <Row className="justify-content-md-center">
-            {!user ? (
-                <Col md={5}>
-                    <LoginView
-                        onLoggedIn={(user) => {
-                            setUser(user);
-                            setToken(token);
-                        }}
-                    />
-                    or
-                    <SignupView />
-                </Col>
-            ) : selectedMovie ? (
-                <Col md={8}>
-                    <MovieView
-                        movie={selectedMovie}
-                        onBackClick={() => setSelectedMovie(null)}
-                    />
-                </Col>
-            ) : movies.length === 0 ? (
-                <div>The list is empty.</div>
-            ) : (
-                <>
-                    <Row className="mb-3" style={{ padding: '10px 0px' }}>
-                        <Col md={{ span: 1, offset: 11 }}>
-                            <Button
-                                variant="dark"
-                                className="button"
-                                onClick={() => {
-                                    setUser(null);
-                                    setToken(null);
-                                    localStorage.clear();
-                                }}
-                            >
-                                Logout
-                            </Button>
-                        </Col>
-                    </Row>
-
-                    {movies.map((movie) => (
-                        <Col className="mb-3" key={movie._id} md={3}>
-                            <MovieCard
-                                movie={movie}
-                                onMovieClick={(newSelectedMovie) => {
-                                    setSelectedMovie(newSelectedMovie);
+        <BrowserRouter>
+            <Row className="justify-content-md-center">
+                <Routes>
+                    {!user ? (
+                        <Col md={5}>
+                            <LoginView
+                                onLoggedIn={(user) => {
+                                    setUser(user);
+                                    setToken(token);
                                 }}
                             />
+                            or
+                            <SignupView />
                         </Col>
-                    ))}
-                </>
-            )}
-        </Row>
-    );
+                    ) : selectedMovie ? (
+                        <Col md={8}>
+                            <MovieView
+                                movie={selectedMovie}
+                                onBackClick={() => setSelectedMovie(null)}
+                            />
+                        </Col>
+                    ) : movies.length === 0 ? (
+                        <div>The list is empty.</div>
+                    ) : (
+                        <>
+                            <Row
+                                className="mb-3"
+                                style={{ padding: '10px 0px' }}
+                            >
+                                <Col md={{ span: 1, offset: 11 }}>
+                                    <Button
+                                        variant="dark"
+                                        className="button"
+                                        onClick={() => {
+                                            setUser(null);
+                                            setToken(null);
+                                            localStorage.clear();
+                                        }}
+                                    >
+                                        Logout
+                                    </Button>
+                                </Col>
+                            </Row>
 
-    {
-        /* let similarMovies = movies.filter(
-            (movie) =>
-                selectedMovie.genre.name === movie.genre.name &&
-                movie.title != selectedMovie.title
-        ); */
-    }
+                            {movies.map((movie) => (
+                                <Col className="mb-3" key={movie._id} md={3}>
+                                    <MovieCard
+                                        movie={movie}
+                                        onMovieClick={(newSelectedMovie) => {
+                                            setSelectedMovie(newSelectedMovie);
+                                        }}
+                                    />
+                                </Col>
+                            ))}
+                        </>
+                    )}
+                </Routes>
+            </Row>
+        </BrowserRouter>
+    );
 };
