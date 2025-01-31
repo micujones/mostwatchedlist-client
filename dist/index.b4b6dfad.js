@@ -18757,10 +18757,7 @@ const MainView = ()=>{
                                         className: "mb-3",
                                         md: 3,
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                            movie: movie,
-                                            onMovieClick: (newSelectedMovie)=>{
-                                                setSelectedMovie(newSelectedMovie);
-                                            }
+                                            movie: movie
                                         }, void 0, false, {
                                             fileName: "components/main-view/main-view.jsx",
                                             lineNumber: 116,
@@ -18831,7 +18828,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
                 variant: "top",
-                src: movie.imagePath
+                src: movie.image
             }, void 0, false, {
                 fileName: "components/movie-card/movie-card.jsx",
                 lineNumber: 14,
@@ -21736,7 +21733,7 @@ const MovieView = ({ movie, onBackClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                src: movie.imagePath,
+                src: movie.image,
                 width: "100%"
             }, void 0, false, {
                 fileName: "components/movie-view/movie-view.jsx",

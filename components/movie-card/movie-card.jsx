@@ -11,7 +11,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             }}
         >
             {/* imagePath is the key name in the database */}
-            <Card.Img variant="top" src={movie.imagePath} />
+            <Card.Img variant="top" src={movie.image} />
             <Card.Body>
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text>Directed by {movie.director.name}</Card.Text>
