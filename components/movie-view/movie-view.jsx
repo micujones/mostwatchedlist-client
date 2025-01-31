@@ -22,7 +22,7 @@ MovieView.propType = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        directors: PropTypes.object.isRequired,
+        director: PropTypes.object.isRequired,
         actors: PropTypes.array.isRequired,
         genre: PropTypes.object,
         image: PropTypes.string,

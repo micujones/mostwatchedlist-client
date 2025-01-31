@@ -68,48 +68,55 @@ export const MainView = () => {
                             </>
                         }
                     />
-                    {selectedMovie ? (
-                        <Col md={8}>
-                            <MovieView
-                                movie={selectedMovie}
-                                onBackClick={() => setSelectedMovie(null)}
-                            />
-                        </Col>
-                    ) : movies.length === 0 ? (
-                        <div>The list is empty.</div>
-                    ) : (
-                        <>
-                            <Row
-                                className="mb-3"
-                                style={{ padding: '10px 0px' }}
-                            >
-                                <Col md={{ span: 1, offset: 11 }}>
-                                    <Button
-                                        variant="dark"
-                                        className="button"
-                                        onClick={() => {
-                                            setUser(null);
-                                            setToken(null);
-                                            localStorage.clear();
-                                        }}
-                                    >
-                                        Logout
-                                    </Button>
-                                </Col>
-                            </Row>
-
-                            {movies.map((movie) => (
-                                <Col className="mb-3" key={movie._id} md={3}>
-                                    <MovieCard
-                                        movie={movie}
-                                        onMovieClick={(newSelectedMovie) => {
-                                            setSelectedMovie(newSelectedMovie);
-                                        }}
-                                    />
-                                </Col>
-                            ))}
-                        </>
-                    )}
+                    <Route
+                        path="/movies/:_id"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    <Col>The list is empty!</Col>
+                                ) : (
+                                    <Col md={8}>
+                                        <MovieView movies={movies} />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    <Col>The list is empty!</Col>
+                                ) : (
+                                    <>
+                                        {movies.map((movie) => (
+                                            <Col
+                                                className="mb-3"
+                                                key={movie._id}
+                                                md={3}
+                                            >
+                                                <MovieCard
+                                                    movie={movie}
+                                                    onMovieClick={(
+                                                        newSelectedMovie
+                                                    ) => {
+                                                        setSelectedMovie(
+                                                            newSelectedMovie
+                                                        );
+                                                    }}
+                                                />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
+                            </>
+                        }
+                    />
                 </Routes>
             </Row>
         </BrowserRouter>
