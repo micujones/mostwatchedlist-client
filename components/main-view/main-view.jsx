@@ -35,6 +35,20 @@ export const MainView = () => {
         <BrowserRouter>
             <Row className="justify-content-md-center">
                 <Routes>
+                    <Route
+                        path="/signup"
+                        element={
+                            <>
+                                {user ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <Col md={5}>
+                                        <SignupView />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
                     {!user ? (
                         <Col md={5}>
                             <LoginView
@@ -43,8 +57,6 @@ export const MainView = () => {
                                     setToken(token);
                                 }}
                             />
-                            or
-                            <SignupView />
                         </Col>
                     ) : selectedMovie ? (
                         <Col md={8}>
