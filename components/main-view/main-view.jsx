@@ -113,16 +113,7 @@ export const MainView = () => {
                                                 key={movie._id}
                                                 md={3}
                                             >
-                                                <MovieCard
-                                                    movie={movie}
-                                                    onMovieClick={(
-                                                        newSelectedMovie
-                                                    ) => {
-                                                        setSelectedMovie(
-                                                            newSelectedMovie
-                                                        );
-                                                    }}
-                                                />
+                                                <MovieCard movie={movie} />
                                             </Col>
                                         ))}
                                     </>
