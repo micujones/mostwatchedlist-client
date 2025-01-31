@@ -26,8 +26,21 @@ export const MainView = () => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
-            .then((movies) => {
-                setMovies(movies);
+            .then((data) => {
+                const moviesFromApi = data.map((movie) => {
+                    return {
+                        id: movie._id,
+                        title: movie.title,
+                        desccription: movie.desccription,
+                        director: movie.director,
+                        actors: movie.actors,
+                        genre: movie.genre,
+                        image: movie.imagePath,
+                        featured: movie.featured,
+                    };
+                });
+
+                setMovies(moviesFromApi);
             });
     }, [token]);
 
