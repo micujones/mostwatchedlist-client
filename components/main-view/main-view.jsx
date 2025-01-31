@@ -49,16 +49,26 @@ export const MainView = () => {
                             </>
                         }
                     />
-                    {!user ? (
-                        <Col md={5}>
-                            <LoginView
-                                onLoggedIn={(user) => {
-                                    setUser(user);
-                                    setToken(token);
-                                }}
-                            />
-                        </Col>
-                    ) : selectedMovie ? (
+                    <Route
+                        path="/login"
+                        element={
+                            <>
+                                {user ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <Col md={5}>
+                                        <LoginView
+                                            onLoggedIn={(user) => {
+                                                setUser(user);
+                                                setToken(token);
+                                            }}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    {selectedMovie ? (
                         <Col md={8}>
                             <MovieView
                                 movie={selectedMovie}
