@@ -107,25 +107,6 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <>
-                                        <Row
-                                            className="mb-3"
-                                            style={{ padding: '10px 0px' }}
-                                        >
-                                            <Col md={{ span: 1, offset: 11 }}>
-                                                <Button
-                                                    variant="dark"
-                                                    className="button"
-                                                    onClick={() => {
-                                                        setUser(null);
-                                                        setToken(null);
-                                                        localStorage.clear();
-                                                    }}
-                                                >
-                                                    Logout
-                                                </Button>
-                                            </Col>
-                                        </Row>
-
                                         {movies.map((movie) => (
                                             <Col
                                                 className="mb-3"
