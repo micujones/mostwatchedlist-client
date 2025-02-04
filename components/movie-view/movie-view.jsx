@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movies, user }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
 
@@ -20,10 +20,17 @@ export const MovieView = ({ movies }) => {
                 <Button variant="dark" className="button">
                     Back
                 </Button>
+                <Button onClick={() => addMovieToFavorites(user, movie)}>
+                    Favorite
+                </Button>
             </Link>
         </div>
     );
 };
+
+function addMovieToFavorites(user, movie) {
+    user.favoriteMovies.push(movie._id);
+}
 
 MovieView.propType = {
     movie: PropTypes.shape({

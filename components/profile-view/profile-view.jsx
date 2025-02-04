@@ -6,14 +6,20 @@
 // Add a “Favorite” button to your MovieCard and/or MovieView components, so that logged in users can select a movie to store in their list of favorites;
 // Allow a user to remove a movie from their list of favorites.
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 export const ProfileView = ({ user, movies }) => {
     const favoriteMovies = movies.filter((movie) =>
         user.favoriteMovies.includes(movie._id)
     );
 
+    const updateUserInformation = () => {};
+
     return (
         <>
             <div>{user.username}</div>
+            <div>update info</div>
             <br />
             <div>Favorite Movies ({user.favoriteMovies.length})</div>
             <>
