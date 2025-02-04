@@ -6,4 +6,25 @@
 // Add a “Favorite” button to your MovieCard and/or MovieView components, so that logged in users can select a movie to store in their list of favorites;
 // Allow a user to remove a movie from their list of favorites.
 
-export const ProfileView = ({ user }) => {};
+export const ProfileView = ({ user, movies }) => {
+    const favoriteMovies = movies.filter((movie) =>
+        user.favoriteMovies.includes(movie._id)
+    );
+
+    return (
+        <>
+            <div>{user.username}</div>
+            <br />
+            <div>Favorite Movies ({user.favoriteMovies.length})</div>
+            <>
+                {user.favoriteMovies.length === 0 ? (
+                    <div>Go favorite some movies!</div>
+                ) : (
+                    favoriteMovies.map((movie) => {
+                        <div>{movie.title}</div>;
+                    })
+                )}
+            </>
+        </>
+    );
+};
