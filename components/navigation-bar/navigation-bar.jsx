@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 export const NavigationBar = ({ user, onLoggedOut }) => {
     return (
         <Navbar expand="lg">
-            {console.log(user)}
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     Most Watched List
