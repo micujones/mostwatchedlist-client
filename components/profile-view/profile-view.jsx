@@ -25,13 +25,22 @@ export const ProfileView = ({ movies }) => {
         fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/`)
             .then((response) => response.json())
             .then((users) => {
-                setUser(users.find((u) => u.id === userId));
+                const currentUser = users.find((u) => u._id === userId);
+                setUser(currentUser);
             });
     };
 
     useEffect(() => {
-        getUser();
+        // getUser();
     }, []);
 
-    return <>{console.log(user)}</>;
+    return (
+        <>
+            {console.log(user)}
+            {/* <div>{user.username}</div>
+            <div>
+                <h2>Favorite movies ({user.favoriteMovies.length}):</h2>
+            </div> */}
+        </>
+    );
 };
