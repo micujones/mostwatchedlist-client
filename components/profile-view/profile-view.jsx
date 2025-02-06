@@ -6,31 +6,32 @@
 // Add a “Favorite” button to your MovieCard and/or MovieView components, so that logged in users can select a movie to store in their list of favorites;
 // Allow a user to remove a movie from their list of favorites.
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
-export const ProfileView = ({ user, movies }) => {
-    const favoriteMovies = movies.filter((movie) =>
-        user.favoriteMovies.includes(movie._id)
-    );
+export const ProfileView = ({ movies }) => {
+    // Reference to user
+    const { userId } = useParams();
 
-    const updateUserInformation = () => {};
+    const [user, setUser] = useState({
+        id: null,
+        username: '',
+        email: '',
+        birthday: null,
+        favoriteMovies: [],
+    });
 
-    return (
-        <>
-            <div>{user.username}</div>
-            <div>update info</div>
-            <br />
-            <div>Favorite Movies ({user.favoriteMovies.length})</div>
-            <>
-                {user.favoriteMovies.length === 0 ? (
-                    <div>Go favorite some movies!</div>
-                ) : (
-                    favoriteMovies.map((movie) => {
-                        <div>{movie.title}</div>;
-                    })
-                )}
-            </>
-        </>
-    );
+    const getUser = () => {
+        fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/`)
+            .then((response) => response.json())
+            .then((users) => {
+                setUser(users.find((u) => u.id === userId));
+            });
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    return <>{console.log(user)}</>;
 };

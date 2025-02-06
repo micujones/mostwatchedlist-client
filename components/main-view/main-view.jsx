@@ -54,7 +54,6 @@ export const MainView = () => {
                     localStorage.clear();
                 }}
             />
-            <Row></Row>
             <Row className="justify-content-md-center">
                 <Routes>
                     <Route
@@ -103,6 +102,7 @@ export const MainView = () => {
                                         <MovieView
                                             movies={movies}
                                             user={user}
+                                            token={token}
                                         />
                                     </Col>
                                 )}
@@ -110,7 +110,7 @@ export const MainView = () => {
                         }
                     />
                     <Route
-                        path="/users/:username"
+                        path="/users/:userId"
                         element={
                             <>
                                 {!user ? (
@@ -118,7 +118,7 @@ export const MainView = () => {
                                 ) : (
                                     <Col>
                                         <ProfileView
-                                            user={user}
+                                            // user={user}
                                             movies={movies}
                                         />
                                     </Col>
@@ -139,7 +139,7 @@ export const MainView = () => {
                                         {movies.map((movie) => (
                                             <Col
                                                 className="mb-3"
-                                                key={movie._id}
+                                                key={movie.id}
                                                 md={3}
                                             >
                                                 <MovieCard movie={movie} />
