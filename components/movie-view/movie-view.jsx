@@ -2,10 +2,50 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { useEffect } from 'react';
 
-export const MovieView = ({ movies, user }) => {
+export const MovieView = ({ movies, user, token }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
+
+    const data = {
+        id: movie.id,
+        title: movie.title,
+        description: movie.description,
+        director: movie.director,
+        actors: movie.actors,
+        genre: movie.genre,
+        image: movie.image,
+        featured: movie.featured,
+    };
+
+    const addMovieToFavorites = (event) => {
+        // Prevents default behavior of reloading page
+        event.preventDefault();
+
+        fetch(
+            `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`,
+            {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    body: JSON.stringify(data),
+                },
+            }
+        )
+            .then((response) => {
+                if (response.ok) {
+                    user.favoriteMovies.push(data.id);
+                    alert(
+                        `${movie.title} was add to ${user.username}'s favorites!`
+                    );
+                }
+            })
+            .catch((e) => {
+                alert('Something broke.');
+            });
+    };
 
     return (
         <div>
@@ -20,17 +60,11 @@ export const MovieView = ({ movies, user }) => {
                 <Button variant="dark" className="button">
                     Back
                 </Button>
-                <Button onClick={() => addMovieToFavorites(user, movie)}>
-                    Favorite
-                </Button>
+                <Button onClick={addMovieToFavorites}>Favorite</Button>
             </Link>
         </div>
     );
 };
-
-function addMovieToFavorites(user, movie) {
-    user.favoriteMovies.push(movie._id);
-}
 
 MovieView.propType = {
     movie: PropTypes.shape({
