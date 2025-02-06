@@ -47,6 +47,28 @@ export const MovieView = ({ movies, user, token }) => {
             });
     };
 
+    const removeMovieFromFavorites = (event) => {
+        // Prevents default behavior of reloading page
+        event.preventDefault();
+
+        fetch(
+            `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        ).then((response) => {
+            if (!response.ok) {
+                alert('Something went wrong.');
+            } else {
+                alert(`${movie.title} was removed from favorites.`);
+            }
+        });
+    };
+
     return (
         <div>
             <img src={movie.image} width="100%" />
@@ -61,6 +83,7 @@ export const MovieView = ({ movies, user, token }) => {
                     Back
                 </Button>
                 <Button onClick={addMovieToFavorites}>Favorite</Button>
+                <Button onClick={removeMovieFromFavorites}>Remove</Button>
             </Link>
         </div>
     );
