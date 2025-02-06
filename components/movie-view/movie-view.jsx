@@ -8,20 +8,20 @@ export const MovieView = ({ movies, user, token }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
 
-    const data = {
-        id: movie.id,
-        title: movie.title,
-        description: movie.description,
-        director: movie.director,
-        actors: movie.actors,
-        genre: movie.genre,
-        image: movie.image,
-        featured: movie.featured,
-    };
-
     const addMovieToFavorites = (event) => {
         // Prevents default behavior of reloading page
         event.preventDefault();
+
+        const data = {
+            id: movie.id,
+            title: movie.title,
+            description: movie.description,
+            director: movie.director,
+            actors: movie.actors,
+            genre: movie.genre,
+            image: movie.image,
+            featured: movie.featured,
+        };
 
         fetch(
             `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`,
@@ -42,8 +42,9 @@ export const MovieView = ({ movies, user, token }) => {
                     );
                 }
             })
-            .catch((e) => {
+            .catch((error) => {
                 alert('Something broke.');
+                console.log(error);
             });
     };
 
@@ -60,13 +61,18 @@ export const MovieView = ({ movies, user, token }) => {
                     'Content-Type': 'application/json',
                 },
             }
-        ).then((response) => {
-            if (!response.ok) {
-                alert('Something went wrong.');
-            } else {
-                alert(`${movie.title} was removed from favorites.`);
-            }
-        });
+        )
+            .then((response) => {
+                if (!response.ok) {
+                    alert('Something went wrong.');
+                    throw new Error('Something went wrong.');
+                } else {
+                    alert(`${movie.title} was removed from favorites.`);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
