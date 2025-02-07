@@ -6,8 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useParams } from 'react-router';
 import { MovieCard } from '../movie-card/movie-card';
+import { UpdateUserView } from '../update-user-view/update-user-view';
 
-export const ProfileView = ({ movies }) => {
+export const ProfileView = ({ movies, token }) => {
     // Reference to user in URL
     const { userId } = useParams();
 
@@ -28,6 +29,10 @@ export const ProfileView = ({ movies }) => {
             });
     };
 
+    const handleUpdate = () => {
+        console.log('handling update.');
+    };
+
     useEffect(() => {
         getUser();
     }, []);
@@ -41,6 +46,7 @@ export const ProfileView = ({ movies }) => {
             <div>
                 <h1>{user.username}</h1>
                 <p>{user.email}</p>
+                <UpdateUserView user={user} token={token} />
             </div>
             <br />
             <div>
