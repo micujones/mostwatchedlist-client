@@ -2,7 +2,6 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import { useEffect } from 'react';
 
 export const MovieView = ({ movies, user, token }) => {
     const { movieId } = useParams();

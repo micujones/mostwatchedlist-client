@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router';
 import { MovieCard } from '../movie-card/movie-card';
-import { UpdateUserView } from '../update-user-view/update-user-view';
+import { UpdateUserView } from './update-user-view';
 import { DeleteUserView } from './delete-user-view';
 
 export const ProfileView = ({ movies, token }) => {
@@ -50,6 +50,9 @@ export const ProfileView = ({ movies, token }) => {
                 <p>{user.email}</p>
                 {/* <UpdateUserView userId={userId} token={token} /> */}
                 <Row>
+                    <Col>
+                        <UpdateUserView userId={userId} token={token} />
+                    </Col>
                     <Col>
                         <DeleteUserView user={user} token={token} />
                     </Col>
