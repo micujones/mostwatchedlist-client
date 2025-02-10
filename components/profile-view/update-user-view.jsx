@@ -77,6 +77,7 @@ export const UpdateUserView = ({ userId, token }) => {
             }
         )
             .then((response) => {
+                console.log(response.body);
                 if (response.ok) {
                     alert('Your changes have been saved.');
                     console.log(data);
@@ -102,7 +103,7 @@ export const UpdateUserView = ({ userId, token }) => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" size="sm" onClick={handleShow}>
                 Update Info
             </Button>
             <Modal

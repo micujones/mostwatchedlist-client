@@ -34,7 +34,7 @@ export const DeleteUserView = ({ user, token }) => {
 
     return (
         <>
-            <Button variant="danger" onClick={handleShow}>
+            <Button variant="danger" size="sm" onClick={handleShow}>
                 Delete Account
             </Button>
             <Modal
