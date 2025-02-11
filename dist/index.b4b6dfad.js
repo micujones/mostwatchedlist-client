@@ -35990,7 +35990,7 @@ const ProfileView = ({ movies, token })=>{
                             gap: 2,
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUserView.UpdateUserView), {
-                                    userId: userId,
+                                    user: user,
                                     token: token
                                 }, void 0, false, {
                                     fileName: "components/profile-view/profile-view.jsx",
@@ -36241,93 +36241,80 @@ var _modalDefault = parcelHelpers.interopDefault(_modal);
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _s = $RefreshSig$();
-const UpdateUserView = ({ userId, token })=>{
+const UpdateUserView = ({ user, token })=>{
     _s();
-    const [user, setUser] = (0, _react.useState)({
-        username: '',
-        password: '',
-        email: '',
-        birthday: null
-    });
     // User data variables
     const [username, setUsername] = (0, _react.useState)(user.username);
     const [password, setPassword] = (0, _react.useState)(user.password);
     const [email, setEmail] = (0, _react.useState)(user.email);
     const birthday = user.birthday;
-    const [data, setData] = (0, _react.useState)({
-        // Body per API https://mostwatchedlist-f9604e12841c.herokuapp.com/documentation#:~:text=JSON%20object%20with%20updated%20user%27s%20data.
-        username: username,
-        password: password,
-        email: email,
-        birthday: birthday
-    });
-    const getUser = ()=>{
-        fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/`).then((response)=>response.json()).then((users)=>{
-            const currentUser = users.find((u)=>u._id === userId);
-            setUser(currentUser);
-            setUsername(currentUser.username);
-            setPassword(currentUser.password);
-            setEmail(currentUser.email);
-        });
-    };
     (0, _react.useEffect)(()=>{
-        getUser();
-    }, []);
-    (0, _react.useEffect)(()=>{
-        setData({
-            username: username,
-            password: password,
-            email: email,
-            birthday: birthday
-        });
         console.log('User:', user);
-        console.log('Data:', data);
     }, [
-        user,
-        username,
-        password,
-        email
+        user
     ]);
     // Modal variables
     const [show, setShow] = (0, _react.useState)(false);
     const handleClose = ()=>setShow(false);
     const handleShow = ()=>setShow(true);
+    // Input functions
     const handleUpdate = ()=>{
-        setData({
+        const updatedData = {
             username: username,
             password: password,
             email: email,
             birthday: birthday
-        });
-        fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`, {
-            method: 'PUT',
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then((response)=>{
-            console.log(response.body);
-            if (response.ok) {
-                alert('Your changes have been saved.');
-                console.log(data);
-            }
-        }).catch((error)=>{
-            console.log(error);
-        });
+        };
+        console.log('Original user:', user);
+        console.log('Updated user:', updatedData);
+    // fetch(
+    //     `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
+    //     {
+    //         method: 'PUT',
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(updatedData),
+    //     }
+    // )
+    //     .then((response) => {
+    //         console.log(response.body);
+    //         if (response.ok) {
+    //             alert('Your changes have been saved.');
+    //             console.log(updatedData);
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
     };
-    const checkInputUpdated = (elementId)=>{
-        const input = document.getElementById(elementId).value;
-        switch(input){
-            case user.username:
-            case user.password:
-            case user.email:
+    function checkInputUpdated(elementId) {
+        const input = document.querySelectorAll(`${elementId} > .form-control`);
+        for(let i = 0; i < input.length; i++)switch(input[i].value){
             case '':
-                return false;
-            default:
-                return true;
+            case null:
+                updateEmptyValue(input[i].id);
+                break;
         }
-    };
+        return true;
+    }
+    function updateEmptyValue(inputId) {
+        switch(inputId){
+            case 'username':
+                setUsername(user.username);
+                break;
+            case 'password':
+                setPassword(user.password);
+                break;
+            case 'email':
+                setEmail(user.email);
+                break;
+        }
+    }
+    function inputAlert() {
+        alert('Nope.');
+    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
@@ -36337,7 +36324,7 @@ const UpdateUserView = ({ userId, token })=>{
                 children: "Update Info"
             }, void 0, false, {
                 fileName: "components/profile-view/update-user-view.jsx",
-                lineNumber: 106,
+                lineNumber: 90,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default), {
@@ -36352,125 +36339,124 @@ const UpdateUserView = ({ userId, token })=>{
                             children: "Update information"
                         }, void 0, false, {
                             fileName: "components/profile-view/update-user-view.jsx",
-                            lineNumber: 116,
+                            lineNumber: 100,
                             columnNumber: 21
                         }, undefined)
                     }, void 0, false, {
                         fileName: "components/profile-view/update-user-view.jsx",
-                        lineNumber: 115,
+                        lineNumber: 99,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Body, {
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                                id: "update-info",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                         children: "Username"
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 120,
+                                        lineNumber: 104,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-                                        id: "update-username",
                                         type: "text",
+                                        id: "username",
+                                        value: username,
                                         placeholder: user.username,
-                                        onSubmit: (e)=>{
-                                            checkInputUpdated('update-username') ? setUsername(e.target.value) : console.log('Not valid username input.');
-                                        }
+                                        onChange: (e)=>setUsername(e.target.value)
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 121,
+                                        lineNumber: 105,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Text, {
                                         children: "Username must be at least 7 characters and cannot contain non-alphanumeric characters."
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 132,
+                                        lineNumber: 112,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 119,
+                                lineNumber: 103,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 137,
+                                lineNumber: 117,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                                id: "update-info",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                         children: "Password"
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 139,
+                                        lineNumber: 119,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-                                        id: "update-password",
-                                        type: "text",
-                                        placeholder: "...",
-                                        onSubmit: (e)=>{
-                                            checkInputUpdated('update-password') ? setPassword(e.target.value) : console.log('Not valid password input.');
-                                        }
+                                        id: "password",
+                                        value: password,
+                                        placeholder: "\u2022\u2022\u2022\u2022\u2022",
+                                        onChange: (e)=>setPassword(e.target.value)
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 140,
+                                        lineNumber: 120,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Text, {
                                         children: "Password must be at least 10 characters."
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 150,
+                                        lineNumber: 126,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 138,
+                                lineNumber: 118,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 154,
+                                lineNumber: 130,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                                id: "update-info",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                                         children: "Email"
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 156,
+                                        lineNumber: 132,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-                                        id: "update-email",
-                                        type: "text",
+                                        id: "email",
+                                        type: "email",
+                                        value: email,
                                         placeholder: user.email,
-                                        onSubmit: (e)=>{
-                                            checkInputUpdated('update-email') ? setEmail(e.target.value) : console.log('Not valid email input.');
-                                        }
+                                        onChange: (e)=>setEmail(e.target.value)
                                     }, void 0, false, {
                                         fileName: "components/profile-view/update-user-view.jsx",
-                                        lineNumber: 157,
+                                        lineNumber: 133,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 155,
+                                lineNumber: 131,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "components/profile-view/update-user-view.jsx",
-                        lineNumber: 118,
+                        lineNumber: 102,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Footer, {
@@ -36481,35 +36467,38 @@ const UpdateUserView = ({ userId, token })=>{
                                 children: "Close"
                             }, void 0, false, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 170,
+                                lineNumber: 143,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                                 variant: "primary",
                                 type: "submit",
-                                onClick: handleUpdate,
+                                onClick: ()=>{
+                                    checkInputUpdated('#update-info');
+                                    handleUpdate();
+                                },
                                 children: "Save Changes"
                             }, void 0, false, {
                                 fileName: "components/profile-view/update-user-view.jsx",
-                                lineNumber: 173,
+                                lineNumber: 146,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "components/profile-view/update-user-view.jsx",
-                        lineNumber: 169,
+                        lineNumber: 142,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/profile-view/update-user-view.jsx",
-                lineNumber: 109,
+                lineNumber: 93,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true);
 };
-_s(UpdateUserView, "9vQg4LoOQHDltH7YDkejd8rdU5Q=");
+_s(UpdateUserView, "qiC7pm5o+gHrOkh4izG8KBLPpA0=");
 _c = UpdateUserView;
 var _c;
 $RefreshReg$(_c, "UpdateUserView");

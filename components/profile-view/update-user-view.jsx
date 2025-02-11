@@ -3,53 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-export const UpdateUserView = ({ userId, token }) => {
-    const [user, setUser] = useState({
-        username: '',
-        password: '',
-        email: '',
-        birthday: null,
-    });
-
+export const UpdateUserView = ({ user, token }) => {
     // User data variables
     const [username, setUsername] = useState(user.username);
     const [password, setPassword] = useState(user.password);
     const [email, setEmail] = useState(user.email);
     const birthday = user.birthday;
-    const [data, setData] = useState({
-        // Body per API https://mostwatchedlist-f9604e12841c.herokuapp.com/documentation#:~:text=JSON%20object%20with%20updated%20user%27s%20data.
-        username: username,
-        password: password,
-        email: email,
-        birthday: birthday,
-    });
-
-    const getUser = () => {
-        fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/`)
-            .then((response) => response.json())
-            .then((users) => {
-                const currentUser = users.find((u) => u._id === userId);
-                setUser(currentUser);
-                setUsername(currentUser.username);
-                setPassword(currentUser.password);
-                setEmail(currentUser.email);
-            });
-    };
 
     useEffect(() => {
-        getUser();
-    }, []);
-
-    useEffect(() => {
-        setData({
-            username: username,
-            password: password,
-            email: email,
-            birthday: birthday,
-        });
         console.log('User:', user);
-        console.log('Data:', data);
-    }, [user, username, password, email]);
+    }, [user]);
 
     // Modal variables
     const [show, setShow] = useState(false);
@@ -57,49 +20,70 @@ export const UpdateUserView = ({ userId, token }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // Input functions
     const handleUpdate = () => {
-        setData({
+        const updatedData = {
             username: username,
             password: password,
             email: email,
             birthday: birthday,
-        });
+        };
+        console.log('Original user:', user);
+        console.log('Updated user:', updatedData);
 
-        fetch(
-            `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
-            {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
+        // fetch(
+        //     `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
+        //     {
+        //         method: 'PUT',
+        //         headers: {
+        //             Authorization: `Bearer ${token}`,
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(updatedData),
+        //     }
+        // )
+        //     .then((response) => {
+        //         console.log(response.body);
+        //         if (response.ok) {
+        //             alert('Your changes have been saved.');
+        //             console.log(updatedData);
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+    };
+
+    function checkInputUpdated(elementId) {
+        const input = document.querySelectorAll(`${elementId} > .form-control`);
+        for (let i = 0; i < input.length; i++) {
+            switch (input[i].value) {
+                case '':
+                case null:
+                    updateEmptyValue(input[i].id);
+                    break;
             }
-        )
-            .then((response) => {
-                console.log(response.body);
-                if (response.ok) {
-                    alert('Your changes have been saved.');
-                    console.log(data);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const checkInputUpdated = (elementId) => {
-        const input = document.getElementById(elementId).value;
-        switch (input) {
-            case user.username:
-            case user.password:
-            case user.email:
-            case '':
-                return false;
-            default:
-                return true;
         }
-    };
+        return true;
+    }
+
+    function updateEmptyValue(inputId) {
+        switch (inputId) {
+            case 'username':
+                setUsername(user.username);
+                break;
+            case 'password':
+                setPassword(user.password);
+                break;
+            case 'email':
+                setEmail(user.email);
+                break;
+        }
+    }
+
+    function inputAlert() {
+        alert('Nope.');
+    }
 
     return (
         <>
@@ -116,18 +100,14 @@ export const UpdateUserView = ({ userId, token }) => {
                     <Modal.Title>Update information</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group>
+                    <Form.Group id="update-info">
                         <Form.Label>Username</Form.Label>
                         <Form.Control
-                            id="update-username"
                             type="text"
+                            id="username"
+                            value={username}
                             placeholder={user.username}
-                            onSubmit={(e) => {
-                                checkInputUpdated('update-username')
-                                    ? // && validateInput('update-username')
-                                      setUsername(e.target.value)
-                                    : console.log('Not valid username input.');
-                            }}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                         <Form.Text>
                             Username must be at least 7 characters and cannot
@@ -135,34 +115,27 @@ export const UpdateUserView = ({ userId, token }) => {
                         </Form.Text>
                     </Form.Group>
                     <br />
-                    <Form.Group>
+                    <Form.Group id="update-info">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                            id="update-password"
-                            type="text"
-                            placeholder="..."
-                            onSubmit={(e) => {
-                                checkInputUpdated('update-password')
-                                    ? setPassword(e.target.value)
-                                    : console.log('Not valid password input.');
-                            }}
+                            id="password"
+                            value={password}
+                            placeholder="•••••"
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <Form.Text>
                             Password must be at least 10 characters.
                         </Form.Text>
                     </Form.Group>
                     <br />
-                    <Form.Group>
+                    <Form.Group id="update-info">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                            id="update-email"
-                            type="text"
+                            id="email"
+                            type="email"
+                            value={email}
                             placeholder={user.email}
-                            onSubmit={(e) => {
-                                checkInputUpdated('update-email')
-                                    ? setEmail(e.target.value)
-                                    : console.log('Not valid email input.');
-                            }}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </Form.Group>
                 </Modal.Body>
@@ -173,7 +146,15 @@ export const UpdateUserView = ({ userId, token }) => {
                     <Button
                         variant="primary"
                         type="submit"
-                        onClick={handleUpdate}
+                        onClick={
+                            () => {
+                                checkInputUpdated('#update-info');
+                                handleUpdate();
+                            }
+                            // checkInputUpdated('#update-info') ?
+
+                            // : inputAlert
+                        }
                     >
                         Save Changes
                     </Button>

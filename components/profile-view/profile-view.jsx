@@ -52,7 +52,7 @@ export const ProfileView = ({ movies, token }) => {
                 {/* <UpdateUserView userId={userId} token={token} /> */}
                 <Row>
                     <Stack direction="horizontal" gap={2}>
-                        <UpdateUserView userId={userId} token={token} />
+                        <UpdateUserView user={user} token={token} />
                         <DeleteUserView user={user} token={token} />
                     </Stack>
                 </Row>
