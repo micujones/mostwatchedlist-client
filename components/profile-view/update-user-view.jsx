@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { element } from 'prop-types';
 
 export const UpdateUserView = ({ user, token }) => {
     // User data variables
-    const [username, setUsername] = useState(user.username);
-    const [password, setPassword] = useState(user.password);
-    const [email, setEmail] = useState(user.email);
+    // const [username, setUsername] = useState(user.username);
+    // const [password, setPassword] = useState(user.password);
+    // const [email, setEmail] = useState(user.email);
     const birthday = user.birthday;
+
+    // useRef versions of variables
+    const username = useRef(user.username);
+    const password = useRef(user.password);
+    const email = useRef(user.email);
 
     useEffect(() => {
         console.log('User:', user);
@@ -23,60 +29,61 @@ export const UpdateUserView = ({ user, token }) => {
     // Input functions
     const handleUpdate = () => {
         const updatedData = {
-            username: username,
-            password: password,
-            email: email,
+            username: username.current,
+            password: password.current,
+            email: email.current,
             birthday: birthday,
         };
-        console.log('Original user:', user);
-        console.log('Updated user:', updatedData);
 
-        // fetch(
-        //     `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
-        //     {
-        //         method: 'PUT',
-        //         headers: {
-        //             Authorization: `Bearer ${token}`,
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(updatedData),
-        //     }
-        // )
-        //     .then((response) => {
-        //         console.log(response.body);
-        //         if (response.ok) {
-        //             alert('Your changes have been saved.');
-        //             console.log(updatedData);
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
+        fetch(
+            `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
+            {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData),
+            }
+        )
+            .then((response) => {
+                console.log(response.body);
+                if (response.ok) {
+                    alert('Your changes have been saved.');
+                    console.log(updatedData);
+                    window.location.reload();
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     function checkInputUpdated(elementId) {
-        const input = document.querySelectorAll(`${elementId} > .form-control`);
-        for (let i = 0; i < input.length; i++) {
-            switch (input[i].value) {
+        const inputArray = document.querySelectorAll(
+            `${elementId} > .form-control`
+        );
+
+        for (let i = 0; i < inputArray.length; i++) {
+            switch (inputArray[i].value) {
                 case '':
                 case null:
-                    updateEmptyValue(input[i].id);
+                    updateEmptyValue(inputArray[i].id);
                     break;
             }
         }
-        return true;
     }
 
     function updateEmptyValue(inputId) {
         switch (inputId) {
             case 'username':
-                setUsername(user.username);
+                username.current = user.username;
                 break;
             case 'password':
-                setPassword(user.password);
+                password.current = user.password;
                 break;
             case 'email':
-                setEmail(user.email);
+                email.current = user.email;
                 break;
         }
     }
@@ -105,9 +112,10 @@ export const UpdateUserView = ({ user, token }) => {
                         <Form.Control
                             type="text"
                             id="username"
-                            value={username}
                             placeholder={user.username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) =>
+                                (username.current = e.target.value)
+                            }
                         />
                         <Form.Text>
                             Username must be at least 7 characters and cannot
@@ -119,9 +127,10 @@ export const UpdateUserView = ({ user, token }) => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             id="password"
-                            value={password}
                             placeholder="•••••"
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) =>
+                                (password.current = e.target.value)
+                            }
                         />
                         <Form.Text>
                             Password must be at least 10 characters.
@@ -133,9 +142,8 @@ export const UpdateUserView = ({ user, token }) => {
                         <Form.Control
                             id="email"
                             type="email"
-                            value={email}
                             placeholder={user.email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => (email.current = e.target.value)}
                         />
                     </Form.Group>
                 </Modal.Body>
@@ -146,15 +154,11 @@ export const UpdateUserView = ({ user, token }) => {
                     <Button
                         variant="primary"
                         type="submit"
-                        onClick={
-                            () => {
-                                checkInputUpdated('#update-info');
-                                handleUpdate();
-                            }
-                            // checkInputUpdated('#update-info') ?
-
-                            // : inputAlert
-                        }
+                        onClick={() => {
+                            checkInputUpdated('#update-info');
+                            handleUpdate();
+                            handleClose();
+                        }}
                     >
                         Save Changes
                     </Button>
