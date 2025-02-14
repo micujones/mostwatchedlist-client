@@ -2,19 +2,13 @@ import { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { element } from 'prop-types';
 
 export const UpdateUserView = ({ user, token }) => {
     // User data variables
-    // const [username, setUsername] = useState(user.username);
-    // const [password, setPassword] = useState(user.password);
-    // const [email, setEmail] = useState(user.email);
-    const birthday = user.birthday;
-
-    // useRef versions of variables
     const username = useRef(user.username);
     const password = useRef(user.password);
     const email = useRef(user.email);
+    const birthday = user.birthday;
 
     useEffect(() => {
         console.log('User:', user);
@@ -26,7 +20,7 @@ export const UpdateUserView = ({ user, token }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // Input functions
+    // Updates user info based on form input
     const handleUpdate = () => {
         const updatedData = {
             username: username.current,
@@ -59,6 +53,7 @@ export const UpdateUserView = ({ user, token }) => {
             });
     };
 
+    // Identifies input that hasn't been updated by user
     function checkInputUpdated(elementId) {
         const inputArray = document.querySelectorAll(
             `${elementId} > .form-control`
@@ -74,6 +69,7 @@ export const UpdateUserView = ({ user, token }) => {
         }
     }
 
+    // Sets empty values to original values for POST body
     function updateEmptyValue(inputId) {
         switch (inputId) {
             case 'username':
@@ -88,10 +84,6 @@ export const UpdateUserView = ({ user, token }) => {
         }
     }
 
-    function inputAlert() {
-        alert('Nope.');
-    }
-
     return (
         <>
             <Button variant="primary" size="sm" onClick={handleShow}>
@@ -102,6 +94,7 @@ export const UpdateUserView = ({ user, token }) => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
+                centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Update information</Modal.Title>
@@ -157,7 +150,6 @@ export const UpdateUserView = ({ user, token }) => {
                         onClick={() => {
                             checkInputUpdated('#update-info');
                             handleUpdate();
-                            handleClose();
                         }}
                     >
                         Save Changes
