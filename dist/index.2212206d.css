@@ -13167,4 +13167,10 @@ textarea.form-control-lg {
 a {
   text-decoration: none;
 }
+
+.card-image {
+  object-fit: cover;
+  max-height: 60%;
+  transition: all 1s;
+}
 /*# sourceMappingURL=index.2212206d.css.map */

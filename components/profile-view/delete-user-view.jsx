@@ -42,6 +42,7 @@ export const DeleteUserView = ({ user, token }) => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
+                centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Account</Modal.Title>

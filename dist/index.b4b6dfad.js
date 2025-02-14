@@ -18801,9 +18801,7 @@ const MainView = ()=>{
                                             className: "mb-3",
                                             md: 3,
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                movie: movie,
-                                                user: user,
-                                                token: token
+                                                movie: movie
                                             }, void 0, false, {
                                                 fileName: "components/main-view/main-view.jsx",
                                                 lineNumber: 145,
@@ -18868,27 +18866,7 @@ var _movieCardScss = require("./movie-card.scss");
 var _card = require("react-bootstrap/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
-// Functions
-var _functionsJsx = require("../functions/functions.jsx");
-// Icons
-var _iconAddSvg = require("../../src/images/icon-add.svg");
-var _iconAddSvgDefault = parcelHelpers.interopDefault(_iconAddSvg);
-var _iconTrashSvg = require("../../src/images/icon-trash.svg");
-var _iconTrashSvgDefault = parcelHelpers.interopDefault(_iconTrashSvg);
-var _s = $RefreshSig$();
-const MovieCard = ({ movie, user, token })=>{
-    _s();
-    // const user
-    const [icon, setIcon] = (0, _react.useState)(()=>user.favoriteMovies.includes(movie.id) ? (0, _iconTrashSvgDefault.default) : (0, _iconAddSvgDefault.default));
-    const handleClick = (event)=>{
-        if (icon === (0, _iconTrashSvgDefault.default)) {
-            (0, _functionsJsx.removeMovieFromFavorites)(movie, user, token, event);
-            setIcon((0, _iconAddSvgDefault.default));
-        } else {
-            (0, _functionsJsx.addMovieToFavorites)(movie, user, token, event);
-            setIcon((0, _iconTrashSvgDefault.default));
-        }
-    };
+const MovieCard = ({ movie })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
             className: "h-100",
@@ -18901,7 +18879,7 @@ const MovieCard = ({ movie, user, token })=>{
                     src: movie.image
                 }, void 0, false, {
                     fileName: "components/movie-card/movie-card.jsx",
-                    lineNumber: 41,
+                    lineNumber: 15,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Body, {
@@ -18910,7 +18888,7 @@ const MovieCard = ({ movie, user, token })=>{
                             children: movie.title
                         }, void 0, false, {
                             fileName: "components/movie-card/movie-card.jsx",
-                            lineNumber: 48,
+                            lineNumber: 22,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Text, {
@@ -18920,33 +18898,23 @@ const MovieCard = ({ movie, user, token })=>{
                             ]
                         }, void 0, true, {
                             fileName: "components/movie-card/movie-card.jsx",
-                            lineNumber: 49,
+                            lineNumber: 23,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "components/movie-card/movie-card.jsx",
-                    lineNumber: 47,
-                    columnNumber: 17
-                }, undefined),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default).Img, {
-                    className: "icon",
-                    src: icon,
-                    onClick: handleClick
-                }, void 0, false, {
-                    fileName: "components/movie-card/movie-card.jsx",
-                    lineNumber: 51,
+                    lineNumber: 21,
                     columnNumber: 17
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "components/movie-card/movie-card.jsx",
-            lineNumber: 36,
+            lineNumber: 10,
             columnNumber: 13
         }, undefined)
     }, void 0, false);
 };
-_s(MovieCard, "VmB3XEIHg5JKO8Gm7mNKDFC/GXA=");
 _c = MovieCard;
 MovieCard.propType = {
     movie: (0, _propTypesDefault.default).shape({
@@ -18968,7 +18936,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7","prop-types":"7wKI2","react":"21dqq","react-router-dom":"lyno9","react-bootstrap/Card":"lAynp","./movie-card.scss":"aiEqd","../../src/images/icon-add.svg":"4mj15","../../src/images/icon-trash.svg":"9lLyU","../functions/functions.jsx":"936EU"}],"8gW2c":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6cfJ7","prop-types":"7wKI2","react":"21dqq","react-router-dom":"lyno9","react-bootstrap/Card":"lAynp","./movie-card.scss":"aiEqd"}],"8gW2c":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -29719,106 +29687,7 @@ const CardTitle = /*#__PURE__*/ _react.forwardRef(({ className, bsPrefix, as: Co
 CardTitle.displayName = 'CardTitle';
 exports.default = CardTitle;
 
-},{"react":"21dqq","classnames":"jocGM","./ThemeProvider":"dVixI","./divWithClassName":"eDg7t","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c"}],"aiEqd":[function() {},{}],"4mj15":[function(require,module,exports,__globalThis) {
-module.exports = require("1e572bcaf9de8e0f").getBundleURL('byUka') + "icon-add.e1455306.svg" + "?" + Date.now();
-
-},{"1e572bcaf9de8e0f":"eVQlK"}],"eVQlK":[function(require,module,exports,__globalThis) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"9lLyU":[function(require,module,exports,__globalThis) {
-module.exports = require("ad19d2f8163b60f1").getBundleURL('byUka') + "icon-trash.18643164.svg" + "?" + Date.now();
-
-},{"ad19d2f8163b60f1":"eVQlK"}],"936EU":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addMovieToFavorites", ()=>addMovieToFavorites);
-parcelHelpers.export(exports, "removeMovieFromFavorites", ()=>removeMovieFromFavorites);
-parcelHelpers.export(exports, "consoleText", ()=>consoleText);
-function addMovieToFavorites(movie, user, token, event) {
-    // Prevents default behavior of reloading page
-    event.preventDefault();
-    const data = {
-        id: movie.id,
-        title: movie.title,
-        description: movie.description,
-        director: movie.director,
-        actors: movie.actors,
-        genre: movie.genre,
-        image: movie.image,
-        featured: movie.featured
-    };
-    fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
-        method: 'POST',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            body: JSON.stringify(data)
-        }
-    }).then((response)=>{
-        if (response.ok) {
-            user.favoriteMovies.push(data.id);
-            alert(`${movie.title} was add to ${user.username}'s favorites!`);
-        }
-    }).catch((error)=>{
-        alert('Something broke.');
-        console.log(error);
-    });
-}
-function removeMovieFromFavorites(movie, user, token, event) {
-    // Prevents default behavior of reloading page
-    event.preventDefault();
-    fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
-        method: 'DELETE',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    }).then((response)=>{
-        if (!response.ok) {
-            alert('Something went wrong.');
-            throw new Error('Something went wrong.');
-        } else alert(`${movie.title} was removed from favorites.`);
-    }).catch((error)=>{
-        console.log(error);
-    });
-}
-function consoleText() {
-    console.log('Function imported.');
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c"}],"lNY7v":[function(require,module,exports,__globalThis) {
+},{"react":"21dqq","classnames":"jocGM","./ThemeProvider":"dVixI","./divWithClassName":"eDg7t","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"8gW2c"}],"aiEqd":[function() {},{}],"lNY7v":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$2e96 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35373,9 +35242,7 @@ const ProfileView = ({ movies, token })=>{
                                 className: "mb-4",
                                 md: 3,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                    movie: movie,
-                                    user: user,
-                                    token: token
+                                    movie: movie
                                 }, void 0, false, {
                                     fileName: "components/profile-view/profile-view.jsx",
                                     lineNumber: 66,
