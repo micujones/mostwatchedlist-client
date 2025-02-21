@@ -11,35 +11,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { UpdateUserView } from './update-user-view';
 import { DeleteUserView } from './delete-user-view';
 
-export const ProfileView = ({ movies, token }) => {
-    // Reference to user in URL
-    const { userId } = useParams();
-
-    const [user, setUser] = useState({
-        id: null,
-        username: '',
-        email: '',
-        birthday: null,
-        favoriteMovies: [],
-    });
-
-    const getUser = () => {
-        fetch(`https://mostwatchedlist-f9604e12841c.herokuapp.com/users/`)
-            .then((response) => response.json())
-            .then((users) => {
-                const currentUser = users.find((u) => u._id === userId);
-                setUser(currentUser);
-            });
-    };
-
-    const handleUpdate = () => {
-        console.log('handling update.');
-    };
-
-    useEffect(() => {
-        getUser();
-    }, []);
-
+export const ProfileView = ({ movies, token, user, setUser }) => {
     const favoriteMovies = movies.filter((movie) =>
         user.favoriteMovies.includes(movie.id)
     );
@@ -49,10 +21,13 @@ export const ProfileView = ({ movies, token }) => {
             <div>
                 <h1>{user.username}</h1>
                 <p>{user.email}</p>
-                {/* <UpdateUserView userId={userId} token={token} /> */}
                 <Row>
                     <Stack direction="horizontal" gap={2}>
-                        <UpdateUserView user={user} token={token} />
+                        <UpdateUserView
+                            user={user}
+                            token={token}
+                            setUser={setUser}
+                        />
                         <DeleteUserView user={user} token={token} />
                     </Stack>
                 </Row>

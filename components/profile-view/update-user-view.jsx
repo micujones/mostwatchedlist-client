@@ -3,15 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-export const UpdateUserView = ({ user, token }) => {
+export const UpdateUserView = ({ user, token, setUser }) => {
     // User data variables
     const username = useRef(user.username);
     const password = useRef(user.password);
     const email = useRef(user.email);
     const birthday = user.birthday;
 
+    // Update locally stored user when user is updated
     useEffect(() => {
-        console.log('User:', user);
+        localStorage.setItem('user', JSON.stringify(user));
     }, [user]);
 
     // Modal variables
@@ -20,7 +21,6 @@ export const UpdateUserView = ({ user, token }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // Updates user info based on form input
     const handleUpdate = () => {
         const updatedData = {
             username: username.current,
@@ -41,10 +41,13 @@ export const UpdateUserView = ({ user, token }) => {
             }
         )
             .then((response) => {
-                console.log(response.body);
                 if (response.ok) {
+                    // Preserve unedited keys
+                    setUser((prevUser) => ({
+                        ...prevUser,
+                        ...updatedData,
+                    }));
                     alert('Your changes have been saved.');
-                    console.log(updatedData);
                     window.location.reload();
                 }
             })

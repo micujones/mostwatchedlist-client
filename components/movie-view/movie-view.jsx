@@ -3,24 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
-export const MovieView = ({ movies, user, token }) => {
+export const MovieView = ({ movies, user, setUser, token }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
 
     const addMovieToFavorites = (event) => {
-        // Prevents default behavior of reloading page
         event.preventDefault();
-
-        const data = {
-            id: movie.id,
-            title: movie.title,
-            description: movie.description,
-            director: movie.director,
-            actors: movie.actors,
-            genre: movie.genre,
-            image: movie.image,
-            featured: movie.featured,
-        };
 
         fetch(
             `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`,
@@ -29,26 +17,26 @@ export const MovieView = ({ movies, user, token }) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
-                    body: JSON.stringify(data),
                 },
             }
         )
             .then((response) => {
-                if (response.ok) {
-                    user.favoriteMovies.push(data.id);
+                if (!response.ok) {
+                    throw new Error('Something went wrong.');
+                } else {
+                    user.favoriteMovies.push(movie.id);
                     alert(
-                        `${movie.title} was add to ${user.username}'s favorites!`
+                        `${movie.title} was added to ${user.username}'s favorites!`
                     );
                 }
             })
             .catch((error) => {
-                alert('Something broke.');
+                alert('Something went wrong.');
                 console.log(error);
             });
     };
 
     const removeMovieFromFavorites = (event) => {
-        // Prevents default behavior of reloading page
         event.preventDefault();
 
         fetch(
@@ -63,13 +51,20 @@ export const MovieView = ({ movies, user, token }) => {
         )
             .then((response) => {
                 if (!response.ok) {
-                    alert('Something went wrong.');
                     throw new Error('Something went wrong.');
                 } else {
+                    const remainingMovies = user.favoriteMovies.filter(
+                        (m) => m !== movie.id
+                    );
+                    setUser((prevUser) => ({
+                        ...prevUser,
+                        favoriteMovies: remainingMovies,
+                    }));
                     alert(`${movie.title} was removed from favorites.`);
                 }
             })
             .catch((error) => {
+                alert('Something went wrong.');
                 console.log(error);
             });
     };

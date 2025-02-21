@@ -18,6 +18,8 @@ export const SignupView = () => {
             birthday: birthday,
         };
 
+        console.log(data);
+
         fetch('https://mostwatchedlist-f9604e12841c.herokuapp.com/users', {
             method: 'POST',
             body: JSON.stringify(data),
