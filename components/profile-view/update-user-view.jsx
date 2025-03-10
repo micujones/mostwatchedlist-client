@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-export const UpdateUserView = ({ user, token, setUser }) => {
+export const UpdateUserView = ({ user, setUser }) => {
     // User data variables
     const username = useRef(user.username);
     const password = useRef(user.password);
@@ -29,6 +29,8 @@ export const UpdateUserView = ({ user, token, setUser }) => {
             birthday: birthday,
         };
 
+        const token = localStorage.getItem('token');
+
         fetch(
             `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
             {
@@ -41,15 +43,18 @@ export const UpdateUserView = ({ user, token, setUser }) => {
             }
         )
             .then((response) => {
-                if (response.ok) {
-                    // Preserve unedited keys
-                    setUser((prevUser) => ({
-                        ...prevUser,
-                        ...updatedData,
-                    }));
-                    alert('Your changes have been saved.');
-                    window.location.reload();
+                if (!response.ok) {
+                    alert('Something went wrong.');
+                    throw new Error('Something went wrong.');
                 }
+                // Preserve unedited keys
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    ...updatedData,
+                }));
+
+                alert('Your changes have been saved.');
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error);

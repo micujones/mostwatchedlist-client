@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
-export const MovieView = ({ movies, user, setUser, token }) => {
+export const MovieView = ({ movies, user, setUser }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
 
     const addMovieToFavorites = (event) => {
         event.preventDefault();
+
+        const token = localStorage.getItem('token');
 
         fetch(
             `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`,
@@ -38,6 +40,8 @@ export const MovieView = ({ movies, user, setUser, token }) => {
 
     const removeMovieFromFavorites = (event) => {
         event.preventDefault();
+
+        const token = localStorage.getItem('token');
 
         fetch(
             `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}/movies/${movie.id}`,

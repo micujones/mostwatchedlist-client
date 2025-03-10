@@ -27,8 +27,9 @@ export const LoginView = ({ onLoggedIn }) => {
                 console.log('Login response: ', data);
                 if (data.user) {
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    localStorage.setItem('token', JSON.stringify(data.token));
+                    localStorage.setItem('token', data.token);
                     onLoggedIn(data.user, data.token);
+                    // window.location.reload();
                 } else {
                     alert('User does not exist.');
                 }

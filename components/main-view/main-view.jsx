@@ -12,7 +12,7 @@ import { NavigationBar } from '../navigation-bar/navigation-bar';
 export const MainView = () => {
     // User data variables
     const storedUser = JSON.parse(localStorage.getItem('user'));
-    const storedToken = JSON.parse(localStorage.getItem('token'));
+    const storedToken = localStorage.getItem('token');
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
 

@@ -2,13 +2,15 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export const DeleteUserView = ({ user, token }) => {
+export const DeleteUserView = ({ user }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const deleteUser = () => {
+        const token = localStorage.getItem('token');
+
         fetch(
             `https://mostwatchedlist-f9604e12841c.herokuapp.com/users/${user.username}`,
             {
@@ -25,6 +27,7 @@ export const DeleteUserView = ({ user, token }) => {
                     throw new Error('Something went wrong.');
                 } else {
                     alert(`${user.username} was deregistered.`);
+                    window.location.reload();
                 }
             })
             .catch((error) => {
