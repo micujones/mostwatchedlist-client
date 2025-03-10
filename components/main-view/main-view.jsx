@@ -3,6 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
+import { ProfileView } from '../profile-view/profile-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -11,7 +12,7 @@ import { NavigationBar } from '../navigation-bar/navigation-bar';
 export const MainView = () => {
     // User data variables
     const storedUser = JSON.parse(localStorage.getItem('user'));
-    const storedToken = JSON.parse(localStorage.getItem('token'));
+    const storedToken = localStorage.getItem('token');
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
 
@@ -53,7 +54,6 @@ export const MainView = () => {
                     localStorage.clear();
                 }}
             />
-            <Row></Row>
             <Row className="justify-content-md-center">
                 <Routes>
                     <Route
@@ -99,7 +99,32 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <Col md={8}>
-                                        <MovieView movies={movies} />
+                                        <MovieView
+                                            movies={movies}
+                                            user={user}
+                                            setUser={setUser}
+                                            token={token}
+                                        />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/users/:userId"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    <Col>
+                                        <ProfileView
+                                            movies={movies}
+                                            token={token}
+                                            user={user}
+                                            // Allow user to be updated in other states
+                                            setUser={setUser}
+                                        />
                                     </Col>
                                 )}
                             </>
@@ -118,7 +143,7 @@ export const MainView = () => {
                                         {movies.map((movie) => (
                                             <Col
                                                 className="mb-3"
-                                                key={movie._id}
+                                                key={movie.id}
                                                 md={3}
                                             >
                                                 <MovieCard movie={movie} />

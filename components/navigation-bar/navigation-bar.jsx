@@ -25,7 +25,17 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                         )}
                         {user && (
                             <>
-                                <Nav.Link to="/">Home</Nav.Link>
+                                <Nav.Link as={Link} to="/">
+                                    Home
+                                </Nav.Link>
+                                <Nav.Link
+                                    as={Link}
+                                    to={`/users/${encodeURIComponent(
+                                        user._id
+                                    )}`}
+                                >
+                                    Profile
+                                </Nav.Link>
                                 <Nav.Link
                                     className="justify-content-end"
                                     onClick={onLoggedOut}
