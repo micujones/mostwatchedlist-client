@@ -103,7 +103,6 @@ export const MainView = () => {
                                             movies={movies}
                                             user={user}
                                             setUser={setUser}
-                                            token={token}
                                         />
                                     </Col>
                                 )}
@@ -120,9 +119,7 @@ export const MainView = () => {
                                     <Col>
                                         <ProfileView
                                             movies={movies}
-                                            token={token}
                                             user={user}
-                                            // Allow user to be updated in other states
                                             setUser={setUser}
                                         />
                                     </Col>
