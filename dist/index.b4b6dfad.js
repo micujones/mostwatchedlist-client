@@ -29798,21 +29798,19 @@ const MovieView = ({ movies, user, setUser })=>{
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
                             children: [
                                 movie.title,
-                                ' ',
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                                        onClick: setIconFunction,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                            src: icon,
-                                            className: "icon"
-                                        }, void 0, false, {
-                                            fileName: "components/movie-view/movie-view.jsx",
-                                            lineNumber: 113,
-                                            columnNumber: 33
-                                        }, undefined)
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                                    onClick: setIconFunction,
+                                    variant: `${icon === (0, _iconAddSvgDefault.default) ? 'success' : 'danger'}`,
+                                    size: "sm",
+                                    style: {
+                                        marginLeft: 12
+                                    },
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                        src: icon,
+                                        className: "icon"
                                     }, void 0, false, {
                                         fileName: "components/movie-view/movie-view.jsx",
-                                        lineNumber: 112,
+                                        lineNumber: 119,
                                         columnNumber: 29
                                     }, undefined)
                                 }, void 0, false, {
@@ -29835,7 +29833,7 @@ const MovieView = ({ movies, user, setUser })=>{
                             ]
                         }, void 0, true, {
                             fileName: "components/movie-view/movie-view.jsx",
-                            lineNumber: 117,
+                            lineNumber: 122,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -29845,14 +29843,14 @@ const MovieView = ({ movies, user, setUser })=>{
                             ]
                         }, void 0, true, {
                             fileName: "components/movie-view/movie-view.jsx",
-                            lineNumber: 120,
+                            lineNumber: 125,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                             children: movie.description
                         }, void 0, false, {
                             fileName: "components/movie-view/movie-view.jsx",
-                            lineNumber: 121,
+                            lineNumber: 126,
                             columnNumber: 21
                         }, undefined)
                     ]

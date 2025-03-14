@@ -107,23 +107,23 @@ export const MovieView = ({ movies, user, setUser }) => {
                 </Col>
                 <Col>
                     <h1>
-                        {movie.title}{' '}
-                        <span>
-                            <Button onClick={setIconFunction}>
-                                <img src={icon} className="icon" />
-                            </Button>
-                        </span>
+                        {movie.title}
+                        <Button
+                            onClick={setIconFunction}
+                            variant={`${
+                                icon === addIcon ? 'success' : 'danger'
+                            }`}
+                            size="sm"
+                            style={{ marginLeft: 12 }}
+                        >
+                            <img src={icon} className="icon" />
+                        </Button>
                     </h1>
                     <p>
                         Starring {movie.actors[0]} and {movie.actors[1]}
                     </p>
                     <p>Directed by {movie.director.name}</p>
                     <p>{movie.description}</p>
-                    {/* <Link to={`/`}>
-                        <Button variant="dark" className="button">
-                            Back
-                        </Button>
-                    </Link> */}
                 </Col>
             </Row>
         </Container>
