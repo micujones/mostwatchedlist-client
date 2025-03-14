@@ -1,9 +1,14 @@
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import { Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+
+// React bootstrap
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 import './movie-view.scss';
 import addIcon from '../../src/images/icon-add.svg';
@@ -99,6 +104,10 @@ export const MovieView = ({ movies, user, setUser }) => {
             : removeMovieFromFavorites(event);
     };
 
+    const renderIconAction = () => {
+        icon === addIcon ? 'Add to favorites' : 'Remove from favorites';
+    };
+
     return (
         <Container>
             <Row>
@@ -108,16 +117,30 @@ export const MovieView = ({ movies, user, setUser }) => {
                 <Col>
                     <h1>
                         {movie.title}
-                        <Button
-                            onClick={setIconFunction}
-                            variant={`${
-                                icon === addIcon ? 'success' : 'danger'
-                            }`}
-                            size="sm"
-                            style={{ marginLeft: 12 }}
+                        <OverlayTrigger
+                            placement="right"
+                            delay={{ show: 400, hide: 300 }}
+                            overlay={
+                                <Tooltip id="button-tooltip-2">
+                                    {`${
+                                        icon === addIcon
+                                            ? 'Add to favorites'
+                                            : 'Remove from favorites'
+                                    }`}
+                                </Tooltip>
+                            }
                         >
-                            <img src={icon} className="icon" />
-                        </Button>
+                            <Button
+                                onClick={setIconFunction}
+                                variant={`${
+                                    icon === addIcon ? 'success' : 'danger'
+                                }`}
+                                size="sm"
+                                style={{ marginLeft: 12 }}
+                            >
+                                <img src={icon} className="icon" />
+                            </Button>
+                        </OverlayTrigger>
                     </h1>
                     <p>
                         Starring {movie.actors[0]} and {movie.actors[1]}
