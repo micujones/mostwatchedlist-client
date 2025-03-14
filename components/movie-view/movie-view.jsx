@@ -2,10 +2,30 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { Container, Row, Col } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+
+import './movie-view.scss';
+import addIcon from '../../src/images/icon-add.svg';
+import trashIcon from '../../src/images/icon-trash.svg';
 
 export const MovieView = ({ movies, user, setUser }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
+
+    const [favorited, setFavorited] = useState(
+        user.favoriteMovies.includes(movie.id)
+    );
+    const [icon, setIcon] = useState();
+
+    // Update "favorited" when removing a movie
+    useEffect(() => {
+        setFavorited(user.favoriteMovies.includes(movie.id));
+    }, [user]);
+
+    useEffect(() => {
+        favorited ? setIcon(trashIcon) : setIcon(addIcon);
+    }, [favorited]);
 
     const addMovieToFavorites = (event) => {
         event.preventDefault();
@@ -31,6 +51,7 @@ export const MovieView = ({ movies, user, setUser }) => {
                         `${movie.title} was added to ${user.username}'s favorites!`
                     );
                 }
+                setFavorited(user.favoriteMovies.includes(movie.id));
             })
             .catch((error) => {
                 alert('Something went wrong.');
@@ -56,16 +77,15 @@ export const MovieView = ({ movies, user, setUser }) => {
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Something went wrong.');
-                } else {
-                    const remainingMovies = user.favoriteMovies.filter(
-                        (m) => m !== movie.id
-                    );
-                    setUser((prevUser) => ({
-                        ...prevUser,
-                        favoriteMovies: remainingMovies,
-                    }));
-                    alert(`${movie.title} was removed from favorites.`);
                 }
+                const remainingMovies = user.favoriteMovies.filter(
+                    (m) => m !== movie.id
+                );
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    favoriteMovies: remainingMovies,
+                }));
+                alert(`${movie.title} was removed from favorites.`);
             })
             .catch((error) => {
                 alert('Something went wrong.');
@@ -73,23 +93,40 @@ export const MovieView = ({ movies, user, setUser }) => {
             });
     };
 
+    const setIconFunction = () => {
+        icon === addIcon
+            ? addMovieToFavorites(event)
+            : removeMovieFromFavorites(event);
+    };
+
     return (
-        <div>
-            <img src={movie.image} width="100%" />
-            <h1>{movie.title}</h1>
-            <p>
-                Starring {movie.actors[0]} and {movie.actors[1]}
-            </p>
-            <p>Directed by {movie.director.name}</p>
-            <p>{movie.description}</p>
-            <Link to={`/`}>
-                <Button variant="dark" className="button">
-                    Back
-                </Button>
-                <Button onClick={addMovieToFavorites}>Favorite</Button>
-                <Button onClick={removeMovieFromFavorites}>Remove</Button>
-            </Link>
-        </div>
+        <Container>
+            <Row>
+                <Col>
+                    <img src={movie.image} width="100%" />
+                </Col>
+                <Col>
+                    <h1>
+                        {movie.title}{' '}
+                        <span>
+                            <Button onClick={setIconFunction}>
+                                <img src={icon} className="icon" />
+                            </Button>
+                        </span>
+                    </h1>
+                    <p>
+                        Starring {movie.actors[0]} and {movie.actors[1]}
+                    </p>
+                    <p>Directed by {movie.director.name}</p>
+                    <p>{movie.description}</p>
+                    {/* <Link to={`/`}>
+                        <Button variant="dark" className="button">
+                            Back
+                        </Button>
+                    </Link> */}
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
