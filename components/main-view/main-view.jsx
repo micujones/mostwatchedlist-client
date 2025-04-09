@@ -85,6 +85,7 @@ export const MainView = () => {
                                             onLoggedIn={(user) => {
                                                 setUser(user);
                                                 setToken(token);
+                                                window.location.reload();
                                             }}
                                         />
                                     </Col>
