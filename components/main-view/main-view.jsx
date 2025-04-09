@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { MovieGrid } from './movie-grid';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
@@ -139,15 +140,7 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <>
-                                        {movies.map((movie) => (
-                                            <Col
-                                                className="mb-3"
-                                                key={movie.id}
-                                                md={3}
-                                            >
-                                                <MovieCard movie={movie} />
-                                            </Col>
-                                        ))}
+                                        <MovieGrid movies={movies} />
                                     </>
                                 )}
                             </>
