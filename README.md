@@ -2,6 +2,8 @@
 
 This app is a client-side database for movies. In the Most Watched List, you will be able to search for movies, get some details, and save them for later!
 
+Visit the app: https://mostwatchedlist.netlify.app/
+
 ## Features
 
 -   **User:** Register and login as a user.
