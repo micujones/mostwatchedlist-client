@@ -3,12 +3,21 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
+import './navigation-bar.scss';
+import logo from '../../src/images/brand-logo.jpeg';
+
 export const NavigationBar = ({ user, onLoggedOut }) => {
     return (
-        <Navbar expand="lg">
+        <Navbar expand="lg" sticky="top">
             <Container>
                 <Navbar.Brand as={Link} to="/">
-                    Most Watched List
+                    <img
+                        src={logo}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                        alt=""
+                    />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { MovieGrid } from './movie-grid';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { HeroSection } from './hero-section';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -34,7 +34,7 @@ export const MainView = () => {
                     return {
                         id: movie._id,
                         title: movie.title,
-                        desccription: movie.desccription,
+                        description: movie.description,
                         director: movie.director,
                         actors: movie.actors,
                         genre: movie.genre,
@@ -141,7 +141,15 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <>
-                                        <MovieGrid movies={movies} />
+                                        <HeroSection />
+                                        <h2 style={{ paddingTop: '24px' }}>
+                                            Available movies
+                                        </h2>
+                                        <MovieGrid
+                                            movies={movies}
+                                            user={user}
+                                            setUser={setUser}
+                                        />
                                     </>
                                 )}
                             </>

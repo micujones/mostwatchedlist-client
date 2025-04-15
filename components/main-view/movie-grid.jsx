@@ -4,11 +4,13 @@ import Form from 'react-bootstrap/Form';
 
 import Col from 'react-bootstrap/Col';
 
-export const MovieGrid = ({ movies }) => {
+import './main-view.scss';
+
+export const MovieGrid = ({ movies, user, setUser }) => {
     const [grid, setGrid] = useState(
         movies.map((movie) => (
             <Col className="mb-3" key={movie.id} md={3}>
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} user={user} setUser={setUser} />
             </Col>
         ))
     );
@@ -32,11 +34,15 @@ export const MovieGrid = ({ movies }) => {
     return (
         <>
             {/* search bar */}
-            <Form.Control
-                type="text"
-                placeholder="Search movies by title"
-                onChange={showSearchResults}
-            />
+            <div className="search-bar-container">
+                <Form.Control
+                    className="search-bar"
+                    type="text"
+                    placeholder="Search movies by title"
+                    onChange={showSearchResults}
+                />
+            </div>
+
             {grid}
         </>
     );

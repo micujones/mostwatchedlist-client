@@ -56,7 +56,7 @@ export const MovieView = ({ movies, user, setUser }) => {
                         `${movie.title} was added to ${user.username}'s favorites!`
                     );
                 }
-                setFavorited(user.favoriteMovies.includes(movie.id));
+                setFavorited(user.favoriteMovies.includes(movie.id)); // Returns true
             })
             .catch((error) => {
                 alert('Something went wrong.');
@@ -104,13 +104,9 @@ export const MovieView = ({ movies, user, setUser }) => {
             : removeMovieFromFavorites(event);
     };
 
-    const renderIconAction = () => {
-        icon === addIcon ? 'Add to favorites' : 'Remove from favorites';
-    };
-
     return (
         <Container>
-            <Row>
+            <Row style={{ paddingTop: '36px' }}>
                 <Col>
                     <img src={movie.image} width="100%" />
                 </Col>
@@ -120,6 +116,7 @@ export const MovieView = ({ movies, user, setUser }) => {
                         <OverlayTrigger
                             placement="right"
                             delay={{ show: 400, hide: 300 }}
+                            style={{ 'backgroud-color': '#fff' }}
                             overlay={
                                 <Tooltip id="button-tooltip-2">
                                     {`${
@@ -136,9 +133,18 @@ export const MovieView = ({ movies, user, setUser }) => {
                                     icon === addIcon ? 'success' : 'danger'
                                 }`}
                                 size="sm"
-                                style={{ marginLeft: 12 }}
+                                style={{
+                                    marginLeft: 12,
+                                }}
                             >
-                                <img src={icon} className="icon" />
+                                <img
+                                    src={icon}
+                                    className={`${
+                                        icon === addIcon
+                                            ? 'add-icon'
+                                            : 'trash-icon'
+                                    }`}
+                                />
                             </Button>
                         </OverlayTrigger>
                     </h1>
@@ -146,7 +152,7 @@ export const MovieView = ({ movies, user, setUser }) => {
                         Starring {movie.actors[0]} and {movie.actors[1]}
                     </p>
                     <p>Directed by {movie.director.name}</p>
-                    <p>{movie.description}</p>
+                    <p style={{ paddingTop: '24px' }}>{movie.description}</p>
                 </Col>
             </Row>
         </Container>

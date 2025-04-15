@@ -15,7 +15,7 @@ export const ProfileView = ({ movies, user, setUser }) => {
 
     return (
         <>
-            <div>
+            <div style={{ paddingTop: '24px' }}>
                 <h1>{user.username}</h1>
                 <p>{user.email}</p>
                 <Row>

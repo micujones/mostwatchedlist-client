@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+import './profile-view.scss';
+
 export const UpdateUserView = ({ user, setUser }) => {
     // User data variables
     const username = useRef(user.username);
@@ -113,12 +115,13 @@ export const UpdateUserView = ({ user, setUser }) => {
                         <Form.Control
                             type="text"
                             id="username"
+                            className="input"
                             placeholder={user.username}
                             onChange={(e) =>
                                 (username.current = e.target.value)
                             }
                         />
-                        <Form.Text>
+                        <Form.Text className="prompt">
                             Username must be at least 7 characters and cannot
                             contain non-alphanumeric characters.
                         </Form.Text>
@@ -128,12 +131,13 @@ export const UpdateUserView = ({ user, setUser }) => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             id="password"
+                            className="input"
                             placeholder="•••••"
                             onChange={(e) =>
                                 (password.current = e.target.value)
                             }
                         />
-                        <Form.Text>
+                        <Form.Text className="prompt">
                             Password must be at least 10 characters.
                         </Form.Text>
                     </Form.Group>
@@ -142,6 +146,7 @@ export const UpdateUserView = ({ user, setUser }) => {
                         <Form.Label>Email</Form.Label>
                         <Form.Control
                             id="email"
+                            className="input"
                             type="email"
                             placeholder={user.email}
                             onChange={(e) => (email.current = e.target.value)}
